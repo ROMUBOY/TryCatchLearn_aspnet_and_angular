@@ -22,7 +22,7 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if(await UserExists(registerDto.Username)) return BadRequest("Nome de Usuário já existente.");
