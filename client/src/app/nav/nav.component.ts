@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -10,14 +11,16 @@ import { Router } from '@angular/router';
 export class NavComponent {
   model : any = {}  
 
-  constructor(public accountService: AccountService, private router : Router){}
+  constructor(public accountService: AccountService, private router : Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {       
   }
 
   login(){
     this.accountService.login(this.model).subscribe({
-      next: () => this.router.navigateByUrl('/aeroportos')           
+      next: _ => this.router.navigateByUrl('/members'),
+      error: error => this.toastr.error(error.error)
     })
   }
 

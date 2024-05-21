@@ -68,12 +68,10 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user)
             };        
         }
-
-        [Authorize]
-        [HttpPost]
+                
         private async Task<bool> UserExists(string username)
         {
-            return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
+            return await _context.Users.AnyAsync(x => x.UserName == username);
         }
     }
 }
